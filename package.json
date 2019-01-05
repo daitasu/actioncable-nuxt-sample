@@ -1,7 +1,7 @@
 {
   "name": "nuxt-serverless-chat-buefy",
   "version": "1.0.0",
-  "description": "My stupendous Nuxt.js project",
+  "description": "The test project of ActionCable + Nuxt.js",
   "author": "daitasu",
   "private": true,
   "scripts": {
