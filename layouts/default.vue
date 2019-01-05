@@ -43,11 +43,11 @@ export default {
     };
   },
   created() {
-    const cable = ActionCable.createConsumer('ws://192.168.33.10:3000/cable');
+    const websocketUrl = `ws://${process.env.BASE_URL}/cable`;
+    const cable = ActionCable.createConsumer(websocketUrl);
 
     this.messageChannel = cable.subscriptions.create( "PostChannel",{
       received: (data) => {
-        console.log("data ->", data)
         this.$store.commit("addMessage", data);
       },
     })
