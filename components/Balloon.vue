@@ -18,10 +18,6 @@ export default {
         }
       }
     }
-  },
-  data() {
-    console.log("this ->", this);
-    return {};
   }
 };
 </script>

@@ -13,10 +13,11 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/axios": "^5.0.0",
+    "actioncable": "^5.2.2",
     "cross-env": "^5.2.0",
     "nuxt": "^2.0.0",
-    "nuxt-buefy": "^0.2.1",
-    "@nuxtjs/axios": "^5.0.0"
+    "nuxt-buefy": "^0.2.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0",

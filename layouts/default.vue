@@ -15,20 +15,6 @@
     </nav>
 
     <section class="main-content columns">
-      <!-- <aside class="column is-2 section">
-        <p class="menu-label is-hidden-touch">General</p>
-        <ul class="menu-list">
-          <li
-            v-for="(item, key) of items"
-            :key="key">
-            <nuxt-link
-              :to="item.to"
-              exact-active-class="is-active">
-              <b-icon :icon="item.icon"/> {{ item.title }}
-            </nuxt-link>
-          </li>
-        </ul>
-      </aside>-->
       <div class="container column is-12">
         <nuxt/>
       </div>
@@ -48,20 +34,31 @@
 </template>
 
 <script>
+import ActionCable from 'actioncable';
+
 export default {
   data() {
     return {
-      items: [
-        { title: "Home", icon: "home", to: { name: "index" } },
-        { title: "Inspire", icon: "lightbulb", to: { name: "inspire" } }
-      ],
       messageText: ""
     };
   },
+  created() {
+    const cable = ActionCable.createConsumer('ws://192.168.33.10:3000/cable');
+
+    this.messageChannel = cable.subscriptions.create( "PostChannel",{
+      received: (data) => {
+        console.log("data ->", data)
+        this.$store.commit("addMessage", data);
+      },
+    })
+  },
   methods: {
     handleClick: function() {
-      console.log(this.$store.state.messages);
-      this.$store.commit("addMessage", this.messageText);
+      //ActionCable PostChannelにおけるpostメソッドを実行する
+      this.messageChannel.perform('post', { 
+        message: this.messageText, 
+      });
+      //メッセージ追加後にテキストボックスを空にする
       this.messageText = ""
     }
   }

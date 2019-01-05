@@ -6,9 +6,6 @@ const createStore = () => {
       messages: []
     }),
     mutations: {
-      increment(state) {
-        state.counter++
-      },
       addMessage(state, messageText) {
         state.messages.push({username: "guest", text: messageText})
       }
